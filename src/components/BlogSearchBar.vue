@@ -1,16 +1,15 @@
 <template>
-    <div class="input-group mb-3">
-      <input
-        type="text"
-        class="form-control"
-        v-model="searchQuery"
-        placeholder="Keresés a címekben..."
-        @input="onSearch"
-      />
-    </div>
-  </template>
-  
-  <script>
+  <v-text-field
+    v-model="searchQuery"
+    label="Search by title"
+    append-icon="mdi-magnify"
+    @input="onSearch"
+    solo
+    clearable
+  ></v-text-field>
+</template>
+
+<script>
 import { ref } from 'vue';
 
 export default {
@@ -29,8 +28,3 @@ export default {
   },
 };
 </script>
-
-  
-  <style scoped>
-  </style>
-  

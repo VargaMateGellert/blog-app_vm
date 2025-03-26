@@ -1,26 +1,30 @@
 <template>
-    <div class="container mt-4">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <h1>Bejelentkezés</h1>
-          <form @submit.prevent="onLogin">
-            <div class="mb-3">
-              <label class="form-label">Email:</label>
-              <input type="email" v-model="credentials.email" class="form-control" required />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Jelszó:</label>
-              <input type="password" v-model="credentials.password" class="form-control" required />
-            </div>
-            <button type="submit" class="btn btn-primary">Bejelentkezés</button>
-          </form>
-          <p class="text-danger mt-2" v-if="error">{{ error }}</p>
-        </div>
-      </div>
-    </div>
-  </template>
-  
-  <script>
+  <v-container class="mt-4">
+    <v-row justify="center">
+      <v-col cols="12" md="6">
+        <h1>Bejelentkezés</h1>
+        <v-form @submit.prevent="onLogin">
+          <v-text-field
+            v-model="credentials.email"
+            label="Email"
+            type="email"
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="credentials.password"
+            label="Jelszó"
+            type="password"
+            required
+          ></v-text-field>
+          <v-btn color="primary" type="submit">Bejelentkezés</v-btn>
+        </v-form>
+        <v-alert type="error" v-if="error" class="mt-2">{{ error }}</v-alert>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
 import { ref } from 'vue';
 import { useAuthStore } from '../store/auth';
 import { useRouter } from 'vue-router';
@@ -54,7 +58,5 @@ export default {
 };
 </script>
 
-  
-  <style scoped>
-  </style>
-  
+<style scoped>
+</style>

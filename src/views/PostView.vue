@@ -1,16 +1,32 @@
 <template>
-    <div class="container mt-4" v-if="post">
-      <h1>{{ post.title }}</h1>
-      <h2 class="text-muted">{{ post.subtitle }}</h2>
-      <img :src="post.image" class="img-fluid my-3" alt="Post kép" v-if="post.image" />
-      <p>{{ post.text }}</p>
-    </div>
-    <div class="container mt-4" v-else>
-      <p>Betöltés...</p>
-    </div>
-  </template>
-  
-  <script>
+  <v-container class="mt-4" v-if="post">
+    <v-row>
+      <v-col>
+        <h1>{{ post.title }}</h1>
+        <h2 class="text--secondary">{{ post.subtitle }}</h2>
+      </v-col>
+    </v-row>
+    <v-row v-if="post.image">
+      <v-col>
+        <v-img :src="post.image" height="300"></v-img>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <p>{{ post.text }}</p>
+      </v-col>
+    </v-row>
+  </v-container>
+  <v-container class="mt-4" v-else>
+    <v-row>
+      <v-col>
+        <p>Betöltés...</p>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { usePostsStore } from '../store/posts';
@@ -36,7 +52,5 @@ export default {
 };
 </script>
 
-  
-  <style scoped>
-  </style>
-  
+<style scoped>
+</style>

@@ -1,34 +1,51 @@
 <template>
-    <div class="container mt-4">
-      <h1>Admin felület</h1>
-      <button class="btn btn-success mb-3" @click="showAddForm = true">Új bejegyzés hozzáadása</button>
-      
-      <div v-if="showAddForm">
+  <v-container class="mt-4">
+    <v-row>
+      <v-col>
+        <h1>Admin felület</h1>
+      </v-col>
+      <v-col cols="12" class="d-flex justify-end">
+        <v-btn color="success" class="mb-3" @click="showAddForm = true">
+          Új bejegyzés hozzáadása
+        </v-btn>
+      </v-col>
+    </v-row>
+
+    <v-row v-if="showAddForm">
+      <v-col cols="12">
         <h2>Új bejegyzés</h2>
         <BlogPostForm @submit="addPost" @cancel="cancelForm" />
-      </div>
-      
-      <div v-if="editPostData">
+      </v-col>
+    </v-row>
+
+    <v-row v-if="editPostData">
+      <v-col cols="12">
         <h2>Bejegyzés szerkesztése</h2>
         <BlogPostForm :post="editPostData" @submit="updatePost" @cancel="cancelForm" />
-      </div>
-      
-      <div v-if="posts.length">
-        <div v-for="post in posts" :key="post.id" class="card mb-3">
-          <div class="card-body">
-            <h5 class="card-title">{{ post.title }}</h5>
-            <button class="btn btn-primary me-2" @click="prepareEdit(post)">Szerkesztés</button>
-            <button class="btn btn-danger" @click="deletePost(post.id)">Törlés</button>
-          </div>
-        </div>
-      </div>
-      <div v-else>
+      </v-col>
+    </v-row>
+
+    <v-row v-if="posts.length">
+      <v-col cols="12" v-for="post in posts" :key="post.id">
+        <v-card class="mb-3">
+          <v-card-title>{{ post.title }}</v-card-title>
+          <v-card-actions>
+            <v-btn color="primary" class="me-2" @click="prepareEdit(post)">Szerkesztés</v-btn>
+            <v-btn color="error" @click="deletePost(post.id)">Törlés</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <v-row v-else>
+      <v-col>
         <p>Nincs bejegyzés.</p>
-      </div>
-    </div>
-  </template>
-  
-  <script>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
 import { ref, onMounted } from 'vue';
 import { usePostsStore } from '../store/posts';
 import { useAuthStore } from '../store/auth';
@@ -43,7 +60,6 @@ export default {
   setup() {
     const authStore = useAuthStore();
     const router = useRouter();
-    // If no user is logged in or the user is not an admin, redirect to home
     if (!authStore.user || authStore.user.role !== 'admin') {
       router.push('/');
     }
@@ -102,6 +118,5 @@ export default {
 };
 </script>
 
-  <style scoped>
-  </style>
-  
+<style scoped>
+</style>

@@ -1,17 +1,29 @@
 <template>
-    <div class="container mt-4">
-      <BlogSearchBar @search="onSearch" />
-      <h1 class="mb-4">Legújabb bejegyzések</h1>
-      <div v-if="posts.length">
-        <BlogPostCard v-for="post in posts" :key="post.id" :post="post" />
-      </div>
-      <div v-else>
+  <v-container class="mt-4">
+    <v-row>
+      <v-col cols="12">
+        <BlogSearchBar @search="onSearch" />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <h1 class="mb-4">Legújabb bejegyzések</h1>
+      </v-col>
+    </v-row>
+    <v-row v-if="posts.length">
+      <v-col cols="12" md="6" v-for="post in posts" :key="post.id">
+        <BlogPostCard :post="post" />
+      </v-col>
+    </v-row>
+    <v-row v-else>
+      <v-col>
         <p>Nincs megjelenítendő bejegyzés.</p>
-      </div>
-    </div>
-  </template>
-  
-  <script>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
 import { onMounted, ref } from 'vue';
 import { usePostsStore } from '../store/posts';
 import BlogPostCard from '../components/BlogPostCard.vue';
@@ -51,7 +63,5 @@ export default {
 };
 </script>
 
-  
-  <style scoped>
-  </style>
-  
+<style scoped>
+</style>

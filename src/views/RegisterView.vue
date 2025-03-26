@@ -1,30 +1,35 @@
 <template>
-    <div class="container mt-4">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <h1>Regisztráció</h1>
-          <form @submit.prevent="onRegister">
-            <div class="mb-3">
-              <label class="form-label">Név:</label>
-              <input type="text" v-model="form.name" class="form-control" required />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Email:</label>
-              <input type="email" v-model="form.email" class="form-control" required />
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Jelszó:</label>
-              <input type="password" v-model="form.password" class="form-control" required />
-            </div>
-            <button type="submit" class="btn btn-primary">Regisztráció</button>
-          </form>
-          <p class="text-danger mt-2" v-if="error">{{ error }}</p>
-        </div>
-      </div>
-    </div>
-  </template>
-  
-  <script>
+  <v-container class="mt-4">
+    <v-row justify="center">
+      <v-col cols="12" md="6">
+        <h1>Regisztráció</h1>
+        <v-form @submit.prevent="onRegister">
+          <v-text-field
+            v-model="form.name"
+            label="Név"
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="form.email"
+            label="Email"
+            type="email"
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="form.password"
+            label="Jelszó"
+            type="password"
+            required
+          ></v-text-field>
+          <v-btn color="primary" type="submit">Regisztráció</v-btn>
+        </v-form>
+        <v-alert type="error" v-if="error" class="mt-2">{{ error }}</v-alert>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
 import { ref } from 'vue';
 import { useAuthStore } from '../store/auth';
 import { useRouter } from 'vue-router';
@@ -59,7 +64,5 @@ export default {
 };
 </script>
 
-  
-  <style scoped>
-  </style>
-  
+<style scoped>
+</style>

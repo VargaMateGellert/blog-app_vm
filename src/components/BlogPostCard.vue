@@ -1,16 +1,16 @@
 <template>
-    <div class="card mb-3">
-      <img :src="post.image" class="card-img-top" alt="Post kép" v-if="post.image" />
-      <div class="card-body">
-        <h5 class="card-title">{{ post.title }}</h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{ post.subtitle }}</h6>
-        <p class="card-text">{{ post.shortText }}</p>
-        <router-link class="btn btn-primary" :to="`/post/${post.id}`">Tovább</router-link>
-      </div>
-    </div>
-  </template>
-  
-  <script>
+  <v-card class="mb-4">
+    <v-img :src="post.image" height="200px" v-if="post.image"></v-img>
+    <v-card-title>{{ post.title }}</v-card-title>
+    <v-card-subtitle>{{ post.subtitle }}</v-card-subtitle>
+    <v-card-text>{{ post.shortText }}</v-card-text>
+    <v-card-actions>
+      <v-btn color="primary" :to="`/post/${post.id}`">Read More</v-btn>
+    </v-card-actions>
+  </v-card>
+</template>
+
+<script>
 export default {
   name: 'BlogPostCard',
   props: {
@@ -21,8 +21,3 @@ export default {
   },
 };
 </script>
-
-  
-  <style scoped>
-  </style>
-  

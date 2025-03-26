@@ -1,8 +1,10 @@
 <template>
-  <div id="app">
+  <v-app>
     <AppNavbar />
-    <router-view />
-  </div>
+    <v-main :key="$route.fullPath">
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
@@ -15,7 +17,6 @@ export default {
   },
 };
 </script>
-
 
 <style>
 /* Alap stílusok */

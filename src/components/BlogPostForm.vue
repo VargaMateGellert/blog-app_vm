@@ -1,33 +1,19 @@
 <template>
-    <form @submit.prevent="onSubmit" class="mb-3">
-      <div class="mb-3">
-        <label class="form-label">Cím:</label>
-        <input type="text" v-model="form.title" class="form-control" required />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Alcím:</label>
-        <input type="text" v-model="form.subtitle" class="form-control" required />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Rövid szöveg:</label>
-        <textarea v-model="form.shortText" class="form-control" required></textarea>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Szöveg:</label>
-        <textarea v-model="form.text" class="form-control" required></textarea>
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Kép URL:</label>
-        <input type="text" v-model="form.image" class="form-control" />
-      </div>
-      <div class="mb-3">
-        <label class="form-label">Kategória:</label>
-        <input type="text" v-model="form.category" class="form-control" required />
-      </div>
-      <button type="submit" class="btn btn-primary">{{ isEdit ? 'Frissítés' : 'Mentés' }}</button>
-      <button type="button" class="btn btn-secondary ms-2" @click="$emit('cancel')">Mégse</button>
-    </form>
-  </template>
+  <v-form @submit.prevent="onSubmit">
+    <v-text-field v-model="form.title" label="Cím" required></v-text-field>
+    <v-text-field v-model="form.subtitle" label="Alcím" required></v-text-field>
+    <v-textarea v-model="form.shortText" label="Rövid szöveg" required></v-textarea>
+    <v-textarea v-model="form.text" label="Szöveg" required></v-textarea>
+    <v-text-field v-model="form.image" label="Kép URL"></v-text-field>
+    <v-text-field v-model="form.category" label="Kategória" required></v-text-field>
+    <v-btn color="primary" type="submit">
+      {{ isEdit ? 'Frissítés' : 'Mentés' }}
+    </v-btn>
+    <v-btn color="secondary" @click="$emit('cancel')">
+      Mégse
+    </v-btn>
+  </v-form>
+</template>
   
   <script>
 import { ref, watch } from 'vue';
